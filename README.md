@@ -2,7 +2,7 @@
  TGO en Análisis y Desarrollo de Software
 
 
- ![butto](https://pbs.twimg.com/media/Fi1PTRkXoAAEFLu?format=jpg&name=large)
+ ![wade](https://static.wikia.nocookie.net/kickbuttowski/images/f/fc/Wade.png/revision/latest?cb=20131030232944&path-prefix=pt-br)
 
  | Temas | Descripción |
  | -- | ----- |
