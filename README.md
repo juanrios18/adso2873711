@@ -2,7 +2,7 @@
  TGO en Análisis y Desarrollo de Software
 
 
- ![Caballo](https://t1.ea.ltmcdn.com/es/razas/0/9/2/caballo-lusitano_290_0_600.jpg)
+ ![butto](https://pm1.aminoapps.com/6559/39e3699af110ac6261f5300fb1f01096ea43d9fd_00.jpg)
 
  | Temas | Descripción |
  | -- | ----- |
