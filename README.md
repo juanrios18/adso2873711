@@ -2,7 +2,7 @@
  TGO en Análisis y Desarrollo de Software
 
 
- ![butto](https://pm1.aminoapps.com/6559/39e3699af110ac6261f5300fb1f01096ea43d9fd_00.jpg)
+ ![butto](https://pbs.twimg.com/media/Fi1PTRkXoAAEFLu?format=jpg&name=large)
 
  | Temas | Descripción |
  | -- | ----- |
