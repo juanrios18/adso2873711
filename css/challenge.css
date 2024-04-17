@@ -1,0 +1,22 @@
+body {
+    background-color: rgb(23, 160, 83);
+    text-align: center;
+}
+a:is(:link, :visited) {
+    background-color: #3333339c;
+    color: white;
+    font-size: 1rem;
+    padding: 18px;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.4s ease-in;
+    margin-inline: 8px;
+    border-bottom: solid 4px white;
+}
+a:is(:hover) {
+    background-color: black;
+    color: white;
+    border-color: rgb(218, 218, 3);
+}
+
+
