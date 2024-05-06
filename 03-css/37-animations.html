@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animations</title>
+    <link rel="stylesheet" href="css/master.css">
+    <style>
+        section img.aguila {
+            position: relative;
+            top: 100px;
+            left: 0;
+            animation: 8s aguila linear infinite;
+        }
+        @keyframes aguila {
+            0%      {left: 0px; }
+            50%     { left: 250px; transform: rotateY(180deg);}
+            55%     { left: 250px; transform: rotateY(180deg);}
+            100%    { left: 0px; }
+        }
+        section img.horse {
+            position: relative;
+            top: -120px;
+            left: 0;
+            animation: 8s horse linear infinite;
+        }
+        @keyframes horse {
+            0%      {left: 0px; }
+            50%     { left: 200px; transform: rotateY(180deg);}
+            55%     { left: 200px; transform: rotateY(180deg);}
+            100%    { left: 0px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="controls">
+        <a href="index.html">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ffffff" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+        </a>
+    </nav>
+    <main>
+        <header>
+            <h1>Animations</h1>
+            <h2>
+                Le permite a un elemento cambiar gradualmente de un estilo a otro.
+            </h2>
+        </header>
+        <section>
+            <h3>Ejemplo:</h3>
+            <img class="aguila" src="images/aguila.png" width="150px">
+            <img class="paisaje" src="images/paisaje.avif" width="400px">
+            <img class="horse" src="images/horseblack.png" width="200px">
+        </section>
+    </main>
+</body>
+</html>
