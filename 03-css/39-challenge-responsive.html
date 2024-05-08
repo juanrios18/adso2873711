@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge Responsive</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;800&display=swap');
+        * {
+            transition: all 0.2s ease-in;
+        }
+        body {
+            background-color: #800000;
+            color: #ffff;
+            font-family: Poppins, sans-serif;
+            font-weight: 400;
+        }
+        main {
+            padding: 2rem;
+        }
+        main header figure.logo {
+            background: url(images/logoreddeadredemption.png) no-repeat center;
+            margin: 0 auto;
+            width: 919px;
+            height: 354px;
+        }
+        main p {
+            line-height: 2rem;
+            text-align: justify;
+        }
+        main h1 {
+            font-size: 4rem;
+            text-align: center;
+        }
+        main h1 span.small,
+        main h1 span.medium {
+            display: none;
+        }
+
+        div.text {
+            background-color: #0009;
+            display: flex;
+            gap: 0.8rem;
+            flex-direction: column;
+            margin: 4rem auto;
+            padding: 0.8rem;
+            width: 1180px;
+            height: 482px;
+
+        div.definicion1 {
+            align-items: center;
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+            height: 300px;
+
+        div.p1 {
+            background: url(images/horse01.jpg) no-repeat;
+            width: 280px;
+            height: 230px;
+            left: 0;
+            top: 0;
+        }
+
+        p {
+            width: 50%;
+            font-size: 1rem;
+            display: flex;
+            text-align: justify;
+        }
+
+        div.espacio1 {
+            display: flex;
+            width: 110px;
+            height: 170px;
+        }
+    }
+}
+        /* - - - - - - - - - - - - - - - - - */
+        /* M E D I A  Q U E R I E S */
+        /* - - - - - - - - - - - - - - - - - */
+        @media (max-width: 1024px) {
+            main header figure.logo {
+                background: url(images/rdr2logo02.png) no-repeat center;
+                width: 348px;
+                height: 370px;
+            }
+            main h1 span.small,
+            main h1 span.large {
+                display: none;
+            }
+            main h1 span.medium {
+                display: inline;
+            }
+            main h1 {
+                font-size: 2.8rem;
+            }
+        }
+        @media (max-width: 780px) {
+            main header figure.logo {
+                background: url(images/rdr2logo03.png) no-repeat center;
+                width: 162px;
+                height: 156px;
+            }
+            main h1 span.medium,
+            main h1 span.large {
+                display: none;
+            }
+            main h1 span.small {
+                display: inline;
+            }
+            main h1 {
+                font-size: 2rem;
+            }
+        }
+        div.boxs {
+            display: flex;
+            gap: 2rem;
+            margin: -3rem auto;
+            background-color: #800000;
+            padding: 1.5rem;
+            width: calc(300px*4);
+            height: 290px;
+        }
+        div.boxs div.rdr1 {
+            background: url(images/arthur01.jpg) no-repeat;
+            font-weight: bold;
+            width: 280px;
+            height: 280px;
+        }
+        div.boxs div.rdr2 {
+            background: url(images/Sadie01.jpg) no-repeat;
+            font-weight: bold;
+            width: 280px;
+            height: 290px;
+        }
+        div.boxs div.rdr3 {
+            background: url(images/Charles01.jpg) no-repeat;
+            font-weight: bold;
+            width: 280px;
+            height: 290px;
+        }
+        div.boxs div.rdr4 {
+            background: url(images/Agibail01.jpg) no-repeat;
+            font-weight: bold;
+            width: 280px;
+            height: 280px;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <header>
+            <figure class="logo"></figure>
+        </header>
+        <section>
+            <div class="boxs">
+                <div class="rdr1"></div>
+                <div class="rdr2"></div>
+                <div class="rdr3"></div>
+                <div class="rdr4"></div>
+            </div>
+            <div class="text">
+                <div class="definicion1">
+                    <div class="p1"></div>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident incidunt officia doloribus illum suscipit delectus quibusdam at amet laborum ad nihil id aliquid laudantium rerum quasi recusandae voluptatibus, quos voluptas accusantium quisquam consequuntur eligendi. Vel optio deserunt dolor nihil adipisci iusto impedit et accusamus quo sequi qui excepturi, rerum inventore..</p>
+                </div>
+                <div class="espacio1"></div>
+                <div class="definicion1">
+                    <div class="p1"></div>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus voluptas quia esse est provident perferendis saepe possimus culpa! Voluptatem fugit beatae veritatis repellendus eos soluta voluptates commodi pariatur reprehenderit? Dolorem debitis odit eaque at tempore sint fugiat accusamus vero ea eius, libero est, quaerat doloribus, quas harum maxime asperiores qui..</p>
+                </div>
+                <div class="espacio1"></div>
+        </section>
+    </main>
+</body>
+</html>
