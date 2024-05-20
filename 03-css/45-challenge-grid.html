@@ -6,32 +6,34 @@
     <title>Challenge Gripd</title>
     <link rel="stylesheet" href="css/master.css">
     <style>
-        section {
+        div.grid1 {
             display: grid;
-            grid-gap: 0.8rem;
-            grid-template-areas:"one two three"
-                                "four two five"
-                                "six six seven";
+            margin-bottom: 0.4rem;
+            grid-gap: 0.4rem;
+            grid-template-areas: "one  two three"
+                                 "four two five"
+                                 "six six seven";
         }
-        section img {
+        div.grid1 img {
             border-radius: 4px;
+            outline: 2px solid rgba(0, 0, 0, 0.8);
             height: 128px;
             object-fit: cover;
             width: 128px;
         }
-        section img:nth-child(1) {grid-area: one;}
-        section img:nth-child(2) {
-            height: calc(128px * 2);
-            grid-area: two;
+        div.grid1 img.img01 { grid-area: one; }
+        div.grid1 img.img02 { 
+            height: calc(128px * 2 + 0.4rem);
+            grid-area: two;  
         }
-        section img:nth-child(3) {grid-area: three;}
-        section img:nth-child(4) {grid-area: four;}
-        section img:nth-child(5) {grid-area: five;}
-        section img:nth-child(6) {
-            grid-area: six;
-            width: calc(128px * 2);
+        div.grid1 img.img03 { grid-area: three; }
+        div.grid1 img.img04 { grid-area: four; }
+        div.grid1 img.img05 { grid-area: five; }
+        div.grid1 img.img06 { 
+            grid-area: six; 
+            width: calc(128px * 2 + 0.4rem);
         }
-        section img:nth-child(7) {grid-area: seven;}
+        div.grid1 img.img07 { grid-area: seven; }
     </style>
 </head>
 <body>
@@ -46,26 +48,14 @@
             <h2>Galeria irregular.</h2>
         </header>
         <section>
-            <div class="box box1">
-                <img src="images/Agibail01.jpg">
-            </div>
-            <div class="box box2">
-                <img src="images/Micah01.jpg">
-            </div>
-            <div class="box box3">
-                <img src="images/arthur01.jpg">
-            </div>
-            <div class="box box4">
-                <img src="images/Sadie01.jpg">
-            </div>
-            <div class="box box5">
-                <img src="images/dutch01.jpg">
-            </div>
-            <div class="box box6">
-                <img src="images/rdr2logo02.png">
-            </div>
-            <div class="box box7">
-                <img src="images/john01.jpg">
+            <div class="grid1">
+                <img class="img01" src="images/Agibail01.jpg">
+                <img class="img02" src="images/Micah01.jpg">
+                <img class="img03" src="images/arthur01.jpg">
+                <img class="img04" src="images/Sadie01.jpg">
+                <img class="img05" src="images/dutch01.jpg">
+                <img class="img06" src="images/rdr2logo02.png">
+                <img class="img07" src="images/john01.jpg">
             </div>
         </section>
     </main>
