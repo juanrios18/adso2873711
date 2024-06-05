@@ -45,7 +45,7 @@ main{
         flex-direction: column;
         align-items: center;
         h1, h2 {
-            color: #0009;
+            color: rgba(255, 255, 255, 0.897);
             text-align: center;
             margin: 0;
         }
