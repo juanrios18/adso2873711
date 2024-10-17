@@ -26,7 +26,7 @@
         section button {
             transition: all 0.2s ease-in;
             &:hover {
-                transform: scale(1.3);
+                transform: scale(1.1);
             }
         }
         section div.attributes {
@@ -35,13 +35,15 @@
             margin: 1rem auto;
             position: relative;
             width: 385px;
+            font-weight: bold;
+            color: black;
         }
         section div.attributes span {
             position: absolute;
         }
         section div.attributes span.brand {
             top: 80px;
-            left: 35px;
+            left: 32px;
         }
         section div.attributes span.refer {
             top: 80px;
@@ -49,13 +51,14 @@
         }
         section div.attributes span.model {
             top: 80px;
-            left: 220px;
+            left: 222px;
         }
         section div.attributes span.color {
             top: 80px;
-            left: 315px;
+            left: 313px;
         }
         section div.landscape {
+            background: url(images/vehicle/fondo.svg);
             background-color: #fff9;
             border: 3px solid rgb(49, 119, 2);
             display: flex;
@@ -70,10 +73,15 @@
             border: none;
             height: 35px;
             width: 35px;
+            cursor: pointer;
         }
         section div.landscape button.btn-prev {
             background: url(images/vehicle/flecha-prew\ light.svg) no-repeat;
             transform: rotateY(180deg);
+            transition: all 0.2s ease-in;
+            &:hover {
+                transform: rotateY(180deg) scale(1.1);
+            }
         }
         section div.landscape button.btn-next {
             background: url(images/vehicle/flecha-next\ light.svg) no-repeat;
@@ -91,24 +99,28 @@
         section div.methods button{
             border: none;
             cursor: pointer;
-            margin-top: 1.8rem;
-            height: 52px;
+            margin-top: 2.2rem;
+            margin-left: 0.3rem;
+            height: 58px;
             width: 60px;
         }
         section div.methods button.btn-on {
             background: url(images/vehicle/on.svg) no-repeat;
+            width: 50px;
         }
         section div.methods button.btn-fwd {
-            background: url(images/vehicle/forward.svg);
+            background: url(images/vehicle/forward.svg) no-repeat;
+            width: 102px;
         }
         section div.methods button.btn-pause {
-            background: url();
+            background: url(images/vehicle/stop.svg) no-repeat;
         }
         section div.methods button.btn-bwd {
-            background: url();
+            background: url(images/vehicle/backward.svg) no-repeat;
+            width: 115px;
         }
         section div.methods button.btn-off {
-            background: url();
+            background: url(images/vehicle/off.svg) no-repeat;
         }
     </style>
 </head>
@@ -121,7 +133,7 @@
     <main>
         <header>
             <h1>Object</h1>
-            <h2>Vehicle</h2>
+            <h2>Motorcycle.</h2>
         </header>
         <section class="Light">
             <div class="header">
