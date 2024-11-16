@@ -18,10 +18,8 @@
                 position: relative;
                 height: 140px;
 
-                img.mode {
-                    object-fit: contain;
-                    border-radius: 0;
-                    background-color: transparent;
+                button.mode {
+                    background: url(images/calc/mode-light.svg);
                     border: none;
                     height: 21px;
                     position: absolute;
@@ -167,9 +165,107 @@
         }
 
         @media (prefers-color-scheme: dark) {
-            /*div.calculator {
-                background: url(images/calc/body-dark.svg);
-            }*/
+            div.calculator {
+                background: url(images/calc/body-dark.svg) no-repeat center;
+
+                header.display {
+                    button.mode {
+                        background: url(images/calc/mode-dark.svg);
+                    }
+                    input.operation {
+                        color: #fff;
+                    }
+
+
+                    h4.result {
+                        color: #fff;
+                    }
+                }
+
+                footer.buttons {
+                    button {
+                        &.btn-clear {
+                            background: url(images/calc/ac-dark.svg);
+                        }
+
+                        &.btn-back {
+                            background: url(images/calc/menor-dark.svg);
+                        }
+
+                        &.btn-pow {
+                            background: url(images/calc/pow-dark.svg);
+                        }
+
+                        &.btn-mod {
+                            background: url(images/calc/mod-dark.svg);
+                        }
+
+                        &.btn-7 {
+                            background: url(images/calc/numero-7.svg);
+                        }
+
+                        &.btn-8 {
+                            background: url(images/calc/numero-8.svg);
+                        }
+
+                        &.btn-9 {
+                            background: url(images/calc/numero-9.svg);
+                        }
+
+                        &.btn-prod {
+                            background: url(images/calc/prod-dark.svg);
+                        }
+
+                        &.btn-4 {
+                            background: url(images/calc/numero-4.svg);
+                        }
+
+                        &.btn-5 {
+                            background: url(images/calc/numero-5.svg);
+                        }
+
+                        &.btn-6 {
+                            background: url(images/calc/numero-6.svg);
+                        }
+
+                        &.btn-subs {
+                            background: url(images/calc/subs-dark.svg);
+                        }
+
+                        &.btn-1 {
+                            background: url(images/calc/numero-1.svg);
+                        }
+
+                        &.btn-2 {
+                            background: url(images/calc/numero-2.svg);
+                        }
+
+                        &.btn-3 {
+                            background: url(images/calc/numero-3.svg);
+                        }
+
+                        &.btn-add {
+                            background: url(images/calc/add-dark.svg);
+                        }
+
+                        &.btn-div {
+                            background: url(images/calc/div-dark.svg);
+                        }
+
+                        &.btn-0 {
+                            background: url(images/calc/numero-0.svg);
+                        }
+
+                        &.btn-dot {
+                            background: url(images/calc/dot-dark.svg);
+                        }
+
+                        &.btn-equal {
+                            background: url(images/calc/equal-dark.svg);
+                        }
+                    }
+                }
+            }
         }
     </style>
 </head>
@@ -191,7 +287,7 @@
         <section>
             <div class="calculator">
                 <header class="display">
-                    <img src="images/calc/mode-light.svg" alt="Mode" class="mode">
+                    <button class="mode"></button>
                     <input type="text" class="operation" value="30x4/2" readonly>
                     <h4 class="result">12.936</h4>
                 </header>
