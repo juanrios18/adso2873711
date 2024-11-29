@@ -10,12 +10,7 @@
         /* Estilos generales */
         body {
             font-family: 'Times New Roman', Times, serif;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             height: 100vh;
-            background-color: #f4f4f4;
         }
 
         .weather-card {
@@ -80,30 +75,30 @@
             font-weight: bold;
             position: relative;
             z-index: 2;
-            margin-top: 25px; /* Ajuste para que no quede tan separado de la fecha */
+            margin-top: 25px;
         }
 
         /* Movimiento del icono detrás de la temperatura */
         .weather-icon {
-            width: 120px; /* Icono más grande */
+            width: 120px;
             height: 120px;
             position: absolute;
             z-index: 1;
             transform: translateX(-50%);
-            animation: moveIcon 6s infinite; /* Animación aplicada */
+            animation: moveIcon 6s infinite;
         }
 
         @keyframes moveIcon {
             0% {
-                transform: translateX(-215px); /* Empieza fuera a la izquierda */
+                transform: translateX(-225px);
             }
 
             50% {
-                transform: translateX(215px); /* Se mueve a la derecha */
+                transform: translateX(225px);
             }
 
             100% {
-                transform: translateX(-215px); /* Regresa a la izquierda */
+                transform: translateX(-225px);
             }
         }
 
