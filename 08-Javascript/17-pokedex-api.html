@@ -43,33 +43,34 @@
             <h2>Consumir API Rest.</h2>
         </header>
         <section>
+            <iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="100%" height="450" src="https://embed.figma.com/design/8ZJXeZJlIp3LL6dJltLego/pokedex?node-id=0-1&embed-host=share" allowfullscreen></iframe>
             <ul class="pokemons">
             </ul>
         </section>
     </main>
     <script>
+        const season1 = [1, 151];
+        const season2 = [152, 251];
         const pks = document.querySelector('.pokemons')
         const loadPokemons = async (pk) => {
-            const url      = 'https://pokeapi.co/api/v2/pokemon/'+pk
-            const response = await fetch(url)
-            const data     = await response.json()
-            const image    = 'https://www.serebii.net/swordshield/pokemon/'+pk+'.png'
-            pks.innerHTML += "<li style='background: #fffa url("+image+") no-repeat center /contain'> \
-                                <span>"+data.name+"</span> \
-                                <span>"+data.id+"</span> \
-                              </li>"
+            for (let pk = season1[0]; pk <= season1[1]; pk++) {
+                const url      = 'https://pokeapi.co/api/v2/pokemon/'+pk
+                await fetch(url)
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data)
+                        //(pk < 100) ? '00'+pk : pk
+                        if (pk < 10) {pk = '00' + pk}
+                        if (pk < 100 && pk > 9) {pk = '0' + pk}
+                        const image    = 'https://www.serebii.net/swordshield/pokemon/'+pk+'.png'
+                        pks.innerHTML += "<li style='background: #fffa url("+image+") no-repeat center /contain'> \
+                                            <span>"+data.id+"</span> \
+                                            <span>"+data.name+"</span> \
+                                        </li>"
+                    })
+            }
         }
-        for (let pk = 152; pk <= 251; pk++) {
-            loadPokemons(pk)
-        }   
-        // let pk = 1
-        // const si = setInterval(function() {
-        //     loadPokemons(pk)
-        //     pk++
-        //     if(pk == 151)
-        //     clearInterval(si)
-        // }, 500)
-        
+        loadPokemons()
     </script>
 </body>
 </html>
