@@ -120,17 +120,66 @@
             text-align: center;
         }
 
-        .stat-bar {
-            background: #ccc;
-            border-radius: 4px;
-            height: 8px;
+        .details-2 {
+            width: 85%;
+            text-align: center;
+        }
+
+        .stat {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 5px 0;
+            color: white;
+            font-size: 14px;
+        }
+
+        .details h2 {
+            font-size: 50px;
+            color: white;
+            font-weight: bold;
+            margin: 10px 0;
+            text-transform: capitalize;
+        }
+
+        .details h3 {
+            font-size: 35px;
+            color: white;
+            margin: 5px 0;
+        }
+
+        .details-2 h4 {
+            font-size: 35px;
+            color: white;
+            font-weight: bold;
+            margin: 20px 0 10px;
             position: relative;
+        }
+
+        .details-2 h4::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 5px;
+            background-color: white;
+            margin: 4px 0;
+        }
+
+        .stat-bar {
+            background: #ffffff;
+            border-radius: 4px;
+            height: 9px;
+            flex: 1;
+            margin: 0 5px;
+            position: relative;
+            max-width: 100%;
         }
 
         .stat-bar .fill {
             height: 100%;
-            background: rgb(145, 0, 0);
+            background: linear-gradient(to right, #ff0404, #ff9100);
             border-radius: 4px;
+            width: 100%;
         }
 
         .btn-back {
@@ -166,11 +215,12 @@
         <button class="btn-back" onclick="goToScreen(2)"></button>
         <div class="details">
             <h2 id="pokemonName"></h2>
+            <h3 id="pokemonNumber"></h3>
             <img id="pokemonImage" src="" alt="Pokemon" style="max-width: 200px;">
-            <div>
-                <h4>Base Stats</h4>
-                <div id="stats"></div>
-            </div>
+        </div>
+        <div class="details-2">
+            <h4>Base Stats</h4>
+            <div id="stats"></div>
         </div>
     </div>
 
@@ -180,6 +230,11 @@
         function goToScreen(screenNumber) {
             document.querySelectorAll('.screen').forEach(screen => screen.classList.add('hidden'));
             document.getElementById(`screen${screenNumber}`).classList.remove('hidden');
+
+            if (screenNumber === 1) {
+                document.getElementById('search').value = '';
+                filterPokemon();
+            }
         }
 
         async function loadPokemon() {
@@ -193,18 +248,15 @@
                 } else if (pk < 100 && pk > 9) {
                     pk = '0' + pk;
                 }
-
                 const list = document.getElementById('pokemonList');
                 const item = document.createElement('div');
                 item.className = 'pokemon-item';
-
                 let imageClass = 'large';
                 const image = new Image();
                 image.src = data.sprites.front_default;
                 image.onload = function () {
                     imageClass = 'large';
                 };
-
                 item.innerHTML = `
                     <div class="name">${data.name.charAt(0).toUpperCase() + data.name.slice(1)}</div>
                     <img src="${data.sprites.front_default}" alt="${data.name}" class="${imageClass}" />
@@ -223,14 +275,12 @@
             filtered.forEach(data => {
                 const item = document.createElement('div');
                 item.className = 'pokemon-item';
-
                 let pk = data.id;
                 if (pk < 10) {
                     pk = '00' + pk;
                 } else if (pk < 100 && pk > 9) {
                     pk = '0' + pk;
                 }
-
                 item.innerHTML = `
                     <div class="name">${data.name.charAt(0).toUpperCase() + data.name.slice(1)}</div>
                     <img src="${data.sprites.front_default}" alt="${data.name}" class="large" />
@@ -243,21 +293,34 @@
 
         function showDetails(data) {
             document.getElementById('pokemonName').textContent = data.name;
+            let pk = data.id;
+            if (pk < 10) {
+                pk = '00' + pk;
+            } else if (pk < 100 && pk > 9) {
+                pk = '0' + pk;
+            }
+            document.getElementById('pokemonNumber').textContent = `#${pk}`;
             document.getElementById('pokemonImage').src = data.sprites.other["official-artwork"].front_default;
             const stats = document.getElementById('stats');
             stats.innerHTML = '';
             data.stats.forEach(stat => {
+                const statValue = Math.min(stat.base_stat, 100);
                 const statItem = document.createElement('div');
+                statItem.className = 'stat';
                 statItem.innerHTML = `
-                    <p>${stat.stat.name.toUpperCase()}</p>
+                    <span style="font-size: 15px; font-weight: bold;">${stat.stat.name.toUpperCase()}</span>
                     <div class="stat-bar">
-                        <div class="fill" style="width: ${stat.base_stat}%"></div>
+                        <div class="fill" style="width: ${statValue}%;"></div>
                     </div>
+                    <span>${stat.base_stat}</span>
                 `;
                 stats.appendChild(statItem);
             });
+            document.getElementById('search').value = '';
+            filterPokemon();
             goToScreen(3);
         }
+
         loadPokemon();
     </script>
 </body>
