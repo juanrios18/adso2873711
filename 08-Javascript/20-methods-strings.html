@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Methods Strings</title>
+    <title>Template</title>
     <link rel="stylesheet" href="css/master.css">
     <style>
         textarea {
-            height: 80px;
+            height: 20px;
             border: 2px solid #b7a63c;
             border-radius: 5px;
             padding: 0.5rem;
@@ -18,26 +18,26 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 0.6rem;
-            input[type=text] {
+            input[type=text]{
                 border: 2px solid #b7a63c;
                 border-radius: 5px;
                 padding: 0.5rem;
                 width: 120px;
             }
-            input[type=radio]{
-                accent-color: #b7a63c;
+            input[type=radio] {
+                margin-right: 0.3rem;
             }
         }
         button.btn-generate {
             background-color: #b7a63c;
-                border-radius: 5px;
-                border: none;
-                color: #fff;
-                cursor: pointer;
-                padding: 0.6rem;
-                display: block;
-                margin: 0 auto;
-                width: 160px;
+            border-radius: 5px;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            padding: 0.6rem;
+            display: block;
+            margin: auto 0;
+            width: 160px;
         }
     </style>
 </head>
@@ -49,65 +49,78 @@
     </nav>
     <main>
         <header>
-            <h1>Methods Strings</h1>
-            <h2>Description.</h2>
+            <h1>Methods String</h1>
+            <h2>Manipulate text using string methods</h2>
         </header>
         <section>
-            <textarea placeholder="Ingresa un parrafo."></textarea>
+            <textarea placeholder="Enter a paragraph"></textarea>
             <div class="row">
                 <label>
                     <input type="radio" class="upper" name="transf">
-                    UPPERCASE
+                    UpperCase
                 </label>
                 OR
                 <label>
                     <input type="radio" class="lower" name="transf">
-                    lowercase
+                    LowerCase
                 </label>
             </div>
-            <!---- ---->
+            <!-- -->
             <div class="row">
                 <input type="text" class="word-ori" placeholder="Word Origin">
                 For
                 <input type="text" class="word-rep" placeholder="Word Replace">
             </div>
-            <!---- ---->
+            <!-- -->
             <div class="row">
                 <input type="text" class="pos-s" placeholder="Start Pos">
                 To
                 <input type="text" class="pos-f" placeholder="Final Pos">
             </div>
-            <button class="btn-generate">Generar</button>
-            <ul class="output">
-
-            </ul>
+            <button class="btn-generate">Generate</button>
+            <ul class="output"></ul>
         </section>
     </main>
     <script>
-        //Elements
+        // Elements
         const string = document.querySelector('textarea')
         const upper  = document.querySelector('.upper')
         const lower  = document.querySelector('.lower')
+        const wdOri  = document.querySelector('.word-ori')
+        const wdRep  = document.querySelector('.word-rep')
+        const pStr   = document.querySelector('.pos-s')
+        const pFnl   = document.querySelector('.pos-f')
 
-        const btn    = document.querySelector('.btn-generate') 
-        const output = document.querySelector('.output') 
+        const btn    = document.querySelector('.btn-generate')
+        const output = document.querySelector('.output')
 
-        //Variables
+        // Variables
         let isUpper = false
 
-        // Event
+        // Events
+        upper.addEventListener('click', function () {
+            isUpper = true
+        })
+        lower.addEventListener('click', function () {
+            isUpper = false
+        })
+
         btn.addEventListener('click', () => {
-            if (string.value.length > 0) {
-                output.innerHTML = "<li><strong>String Original: </strong>"+string.value+"</li>"
+            if (string.value.length > 0) { 
+                output.innerHTML = "<li><strong>Original String: </strong>"+string.value+"</li>"
+                output.innerHTML += "<li><strong>Length: </strong>"+string.value.length+"</li>"
                 if (isUpper) {
-                    output.innerHTML += "<li><strong>UpperCase String: </strong>"+string.value.toUpperCase()+"</li>"
+                    output.innerHTML += "<li><strong>UpperCase: </strong>"+string.value.toUpperCase()+"</li>"
                 } else {
-                    output.innerHTML += "<li><strong>LowerCase String: </strong>"+string.value.toLowerCase()+"</li>"
+                    output.innerHTML += "<li><strong>LowerCase: </strong>"+string.value.toLowerCase()+"</li>"
                 }
+                output.innerHTML += "<li><strong>Replacement: </strong>"+string.value.replace(wdOri.value, wdRep.value)+"</li>"
+                output.innerHTML += "<li><strong>Cut String: </strong>"+string.value.substring(parseInt(pStr.value), parseInt(pFnl.value))+"</li>"
             } else {
-                alert('Por favor ingrese un parrafo.')
+                alert('Please enter a paragraph')
             }
         })
     </script>
+</html>
 </body>
 </html>
