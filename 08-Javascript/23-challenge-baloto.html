@@ -1,28 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Challenge</title>
+    <title>Challenge Baloto</title>
     <link rel="stylesheet" href="css/master.css">
+    <style>
+        .screen {
+            width: 400px;
+            height: 720px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .btn-enter {
+            margin-top: 270px;
+            background: url('images/baloto/jugarbaloto.svg') no-repeat center;
+            background-size: cover;
+            width: 186px;
+            height: 51px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .title-2 {
+            position: absolute;
+            top: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: url('images/baloto/title.svg') no-repeat center;
+            width: 292px;
+            height: 72px;
+            background-size: contain;
+        }
+
+        .btn-back {
+            position: absolute;
+            top: 40px;
+            left: 15px;
+            background: url('images/baloto/back.png') no-repeat center;
+            background-size: cover;
+            width: 30px;
+            height: 30px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .baloto-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 100px;
+            justify-items: center;
+            align-items: center;
+            position: relative;
+            height: 200px;
+        }
+
+        .ball {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: appear 0.5s ease-out forwards;
+        }
+
+        .green-ball {
+            background-color: #26eb26;
+        }
+
+        .red-ball {
+            background-color: red;
+            grid-column: 2 / 3;
+            grid-row: 2 / 3;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .btn-play {
+            background: url('images/baloto/generarNum.png') no-repeat center;
+            width: 238px;
+            height: 98px;
+            margin-top: 50px;
+            cursor: pointer;
+            border: none;
+        }
+    </style>
 </head>
+
 <body>
-    <nav class="controls">
-        <a href="index.html">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="#ffffff" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
-        </a>
-    </nav>
     <main>
-        <header>
-            <h1>Challenge Baloto</h1>
-            <h2>
-                Simula una loteria 
-            </h2>
-        </header>
         <section>
-            
+            <div class="screen" id="screen1" style="background-image: url('images/baloto/bajolote.png');">
+                <button class="btn-enter" onclick="goToScreen(2)"></button>
+            </div>
+            <div class="screen hidden" id="screen2" style="background-image: url('images/baloto/fondoseg.png');">
+                <button class="btn-back" onclick="goToScreen(1)"></button>
+                <h1 class="title-2"></h1>
+                <div class="baloto-container" id="balotoContainer"></div>
+                <button class="btn-play" onclick="generateBaloto()"></button>
+            </div>
         </section>
     </main>
-</html>
+    <script>
+        function goToScreen(screenNumber) {
+            document.querySelectorAll('.screen').forEach(screen => screen.classList.add('hidden'));
+            document.getElementById(`screen${screenNumber}`).classList.remove('hidden');
+        }
+
+        function generateBaloto() {
+            let balotoContainer = document.getElementById("balotoContainer");
+            balotoContainer.innerHTML = "";
+
+            let numbers = new Set();
+            while (numbers.size < 5) {
+                numbers.add(Math.floor(Math.random() * 50) + 1);
+            }
+            numbers = [...numbers];
+
+            numbers.forEach(num => {
+                let ball = document.createElement("div");
+                ball.classList.add("ball", "green-ball");
+                ball.textContent = num;
+                balotoContainer.appendChild(ball);
+            });
+
+            let redNumber = Math.floor(Math.random() * 16) + 1;
+            let redBall = document.createElement("div");
+            redBall.classList.add("ball", "red-ball");
+            redBall.textContent = redNumber;
+            balotoContainer.appendChild(redBall);
+        }
+    </script>
 </body>
+
 </html>
