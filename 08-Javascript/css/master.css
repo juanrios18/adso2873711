@@ -45,7 +45,7 @@ main{
         flex-direction: column;
         align-items: center;
         h1, h2 {
-            color: rgb(59, 59, 59);
+            color: rgb(32, 32, 32);
             text-align: center;
             margin: 0;
         }
@@ -110,7 +110,7 @@ main{
     section {
         border-radius: 10px;
         background-color: #fff9;
-        color: #0009;
+        color: #000000da;
         padding: 10px;
         width: 400px;
         h3 {
