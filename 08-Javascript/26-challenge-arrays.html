@@ -192,130 +192,112 @@
     </main>
     <script>
         const babosas = ["burpy.png", "dirigible.png", "yulls.png", "sierra.png", "bomba.png", "carnero.png", "fandango.png", "estropeada.png", "apestosa.png", "loca.png", "malvada-1.png", "malvada-2.png", "malvada-3.png", "malvada-4.png", "malvada-5.png", "malvada-6.png", "malvada-7.png", "malvada-8.png", "malvada-9.png", "malvada-10.png"];
-const container = document.getElementById("babosa-container");
-const resultContainer = document.getElementById("result");
-let selectedBabosa = null;
+        const container = document.getElementById("babosa-container");
+        const resultContainer = document.getElementById("result");
+        let selectedBabosa = null;
 
-// Cargar las imágenes de las babosas
-babosas.forEach((babosa, index) => {
-    const img = document.createElement("img");
-    img.src = `images/disparaBabosa/${babosa}`;
-    img.classList.add("babosa");
-    img.dataset.index = index;
-    img.addEventListener("click", () => {
-        document.querySelectorAll(".babosa").forEach(b => b.classList.remove("selected"));
-        img.classList.add("selected");
-        selectedBabosa = babosa; // Guardar la babosa seleccionada
-    });
-    container.appendChild(img);
-});
+        babosas.forEach((babosa, index) => {
+            const img = document.createElement("img");
+            img.src = `images/disparaBabosa/${babosa}`;
+            img.classList.add("babosa");
+            img.dataset.index = index;
+            img.addEventListener("click", () => {
+                document.querySelectorAll(".babosa").forEach(b => b.classList.remove("selected"));
+                img.classList.add("selected");
+                selectedBabosa = babosa;
+            });
+            container.appendChild(img);
+        });
 
-function toggleButton(buttonId, defaultText, toggledText) {
-    const button = document.getElementById(buttonId);
-    button.classList.toggle("active");
-    button.textContent = button.classList.contains("active") ? toggledText : defaultText;
-}
-
-function selectBabosa() {
-    const index = document.getElementById("babosa-index").value;
-    if (index >= 0 && index < babosas.length) {
-        document.querySelectorAll(".babosa").forEach(b => b.classList.remove("selected"));
-        const selectedImg = document.querySelectorAll(".babosa")[index];
-        if (selectedImg) {
-            selectedImg.classList.add("selected");
-            selectedBabosa = babosas[index];
+        function toggleButton(buttonId, defaultText, toggledText) {
+            const button = document.getElementById(buttonId);
+            button.classList.toggle("active");
+            button.textContent = button.classList.contains("active") ? toggledText : defaultText;
         }
-    }
-}
 
-// Función para actualizar los índices mostrados en las babosas del resultado
-function updateBabosaIndices() {
-    // Eliminar cualquier índice existente
-    const existingIndices = resultContainer.querySelectorAll(".babosa-index");
-    existingIndices.forEach(index => index.remove());
-    
-    // Añadir nuevos índices
-    Array.from(resultContainer.children).forEach((babosa, index) => {
-        const indexElement = document.createElement("div");
-        indexElement.textContent = index;
-        indexElement.classList.add("babosa-index");
-        indexElement.style.position = "absolute";
-        indexElement.style.top = "0";
-        indexElement.style.right = "2px";
-        indexElement.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
-        indexElement.style.color = "white";
-        indexElement.style.borderRadius = "50%";
-        indexElement.style.width = "20px";
-        indexElement.style.height = "20px";
-        indexElement.style.display = "flex";
-        indexElement.style.alignItems = "center";
-        indexElement.style.justifyContent = "center";
-        indexElement.style.fontSize = "12px";
-        indexElement.style.fontWeight = "bold";
-        
-        // Hacer que el contenedor de la babosa sea relative para posicionar el índice correctamente
-        babosa.style.position = "relative";
-        babosa.appendChild(indexElement);
-    });
-}
-
-// Corregir el evento del arma
-document.querySelector(".weapon").addEventListener("click", () => {
-    // Obtener el texto actual de los botones para determinar la acción
-    const actionText = document.getElementById("button-2").textContent; // "Add" o "Remove"
-    const positionText = document.getElementById("button-1").textContent; // "First" o "Last"
-    
-    // Verificar si ya hay 5 babosas y estamos intentando agregar
-    if (actionText === "Add" && resultContainer.children.length >= 5) {
-        return;
-    }
-
-    if (actionText === "Add" && selectedBabosa) {
-        const div = document.createElement("div");
-        div.style.position = "relative";
-        div.style.display = "inline-block";
-        
-        const img = document.createElement("img");
-        img.src = `images/disparaBabosa/${selectedBabosa}`;
-        img.classList.add("babosa");
-        div.appendChild(img);
-
-        if (positionText === "First") {
-            // Agregar al principio
-            resultContainer.prepend(div);
-        } else {
-            // Agregar al final (Last)
-            resultContainer.appendChild(div);
-        }
-    } else if (actionText === "Remove") {
-        // Modo Remove
-        const index = document.getElementById("babosa-index").value;
-
-        if (index !== "") {
-            // Eliminar por índice específico
-            const indexToRemove = parseInt(index);
-            if (indexToRemove >= 0 && indexToRemove < resultContainer.children.length) {
-                resultContainer.removeChild(resultContainer.children[indexToRemove]);
-            }
-        } else {
-            // Eliminar el primero o el último según la opción first/last
-            if (positionText === "First") {
-                // Eliminar el primero
-                if (resultContainer.firstChild) {
-                    resultContainer.removeChild(resultContainer.firstChild);
-                }
-            } else {
-                // Eliminar el último (Last)
-                if (resultContainer.lastChild) {
-                    resultContainer.removeChild(resultContainer.lastChild);
+        function selectBabosa() {
+            const index = document.getElementById("babosa-index").value;
+            if (index >= 0 && index < babosas.length) {
+                document.querySelectorAll(".babosa").forEach(b => b.classList.remove("selected"));
+                const selectedImg = document.querySelectorAll(".babosa")[index];
+                if (selectedImg) {
+                    selectedImg.classList.add("selected");
+                    selectedBabosa = babosas[index];
                 }
             }
         }
-    }
-    
-    // Actualizar los índices después de cualquier cambio
-    updateBabosaIndices();
-});
+
+        function updateBabosaIndices() {
+            const existingIndices = resultContainer.querySelectorAll(".babosa-index");
+            existingIndices.forEach(index => index.remove());
+
+            Array.from(resultContainer.children).forEach((babosa, index) => {
+                const indexElement = document.createElement("div");
+                indexElement.textContent = index;
+                indexElement.classList.add("babosa-index");
+                indexElement.style.position = "absolute";
+                indexElement.style.top = "0";
+                indexElement.style.right = "2px";
+                indexElement.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
+                indexElement.style.color = "white";
+                indexElement.style.borderRadius = "50%";
+                indexElement.style.width = "20px";
+                indexElement.style.height = "20px";
+                indexElement.style.display = "flex";
+                indexElement.style.alignItems = "center";
+                indexElement.style.justifyContent = "center";
+                indexElement.style.fontSize = "12px";
+                indexElement.style.fontWeight = "bold";
+                babosa.style.position = "relative";
+                babosa.appendChild(indexElement);
+            });
+        }
+
+        document.querySelector(".weapon").addEventListener("click", () => {
+            const actionText = document.getElementById("button-2").textContent;
+            const positionText = document.getElementById("button-1").textContent;
+
+            if (actionText === "Add" && resultContainer.children.length >= 5) {
+                return;
+            }
+
+            if (actionText === "Add" && selectedBabosa) {
+                const div = document.createElement("div");
+                div.style.position = "relative";
+                div.style.display = "inline-block";
+
+                const img = document.createElement("img");
+                img.src = `images/disparaBabosa/${selectedBabosa}`;
+                img.classList.add("babosa");
+                div.appendChild(img);
+
+                if (positionText === "First") {
+                    resultContainer.prepend(div);
+                } else {
+                    resultContainer.appendChild(div);
+                }
+            } else if (actionText === "Remove") {
+                const index = document.getElementById("babosa-index").value;
+
+                if (index !== "") {
+                    const indexToRemove = parseInt(index);
+                    if (indexToRemove >= 0 && indexToRemove < resultContainer.children.length) {
+                        resultContainer.removeChild(resultContainer.children[indexToRemove]);
+                    }
+                } else {
+                    if (positionText === "First") {
+                        if (resultContainer.firstChild) {
+                            resultContainer.removeChild(resultContainer.firstChild);
+                        }
+                    } else {
+                        if (resultContainer.lastChild) {
+                            resultContainer.removeChild(resultContainer.lastChild);
+                        }
+                    }
+                }
+            }
+            updateBabosaIndices();
+        });
     </script>
 </body>
 
