@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juego de Canoa</title>
+    <link rel="stylesheet" href="css/master.css">
+    <style>
+        #game-container {
+            width: 400px;
+            height: 600px;
+            background-image: url('images/juego/fondo_portada.png');
+            background-size: cover;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #title {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 100px;
+        }
+
+        #instructions {
+            position: absolute;
+            top: 140px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 195px;
+            height: 122px;
+        }
+
+        #canoe-selector {
+            background-image: url('images/juego/cajon.png');
+            position: absolute;
+            top: 330px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 190px;
+            height: 122px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #canoe-title-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 5px;
+        }
+
+        #canoe-title {
+            width: 141px;
+            height: 18px;
+        }
+
+        #canoe-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0 10px;
+        }
+
+        .arrow {
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+        }
+
+        #selected-canoe {
+            width: 52px;
+            height: 52px;
+        }
+
+        #navigate-button {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 298px;
+            height: 90px;
+            cursor: pointer;
+        }
+
+        #game-play {
+            display: none;
+            width: 400px;
+            height: 600px;
+            background-image: url('images/juego/image.png');
+            background-size: cover;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #hearts {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+        }
+
+        .heart {
+            width: 45px;
+            height: 45px;
+            margin-left: 5px;
+        }
+
+        #score,
+        #timer {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 24px;
+        }
+
+        #timer {
+            top: 50px;
+        }
+
+        .obstacle,
+        .lifebuoy {
+            width: 60px;
+            height: 60px;
+            position: absolute;
+            background-size: cover;
+        }
+
+        #player-canoe {
+            width: 72px;
+            height: 72px;
+            position: absolute;
+            bottom: 20px;
+            left: 164px;
+            background-size: cover;
+        }
+
+        #modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        #modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        #modal-content h2 {
+            margin-bottom: 15px;
+        }
+
+        #modal-content button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: green;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="controls">
+        <a href="index.html">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <path fill="#ffffff"
+                    d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
+            </svg>
+        </a>
+    </nav>
+    <main>
+        <header>
+            <h1>Challenge Events Time</h1>
+        </header>
+        <section>
+            <div id="game-container">
+                <img src="images/juego/titulo.png" id="title" alt="Título del Juego">
+                <img src="images/juego/instruct.png" id="instructions" alt="Instrucciones">
+
+                <div id="canoe-selector">
+                    <div id="canoe-title-container">
+                        <img src="images/juego/select-canoe.png" id="canoe-title" alt="Título Canoa">
+                    </div>
+                    <div id="canoe-controls">
+                        <img src="images/juego/select-der.png" class="arrow" id="left-arrow" alt="Izquierda">
+                        <img src="images/juego/barco1.png" id="selected-canoe" alt="Canoa Seleccionada">
+                        <img src="images/juego/select-izq.png" class="arrow" id="right-arrow" alt="Derecha">
+                    </div>
+                </div>
+
+                <img src="images/juego/button.png" id="navigate-button" alt="Botón Navegar">
+            </div>
+
+            <div id="game-play">
+                <div id="hearts"></div>
+                <div id="score">Puntos: 0</div>
+                <div id="timer">Tiempo: 60</div>
+                <div id="player-canoe"></div>
+            </div>
+
+            <div id="modal">
+                <div id="modal-content">
+                    <h2>¡Has perdido!</h2>
+                    <p>Presiona aceptar para volver al inicio.</p>
+                    <button id="restart-button">Aceptar</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        let currentCanoe = 1;
+        let score = 0;
+        let hearts = 3;
+        let timeLeft = 60;
+        let gameInterval, obstacleTimer, lifebuoyTimer, timerInterval;
+        let gameOverTriggered = false;
+        let obstacleDelay = 1500;
+        let lifebuoyDelay = 5000;
+        let activeLeftPositions = [];
+
+        const canoeImages = [
+            'images/juego/barco1.png',
+            'images/juego/barco2.png',
+            'images/juego/barco3.png',
+            'images/juego/barco4.png',
+            'images/juego/barco5.png'
+        ];
+
+        const obstacleImages = [
+            'images/juego/obs1.png',
+            'images/juego/obs2.png',
+            'images/juego/obs3.png',
+            'images/juego/obs4.png',
+            'images/juego/obs5.png',
+            'images/juego/obs6.png',
+            'images/juego/obs7.png'
+        ];
+
+        function startGame() {
+            document.getElementById('game-container').style.display = 'none';
+            document.getElementById('game-play').style.display = 'block';
+            updateHearts();
+            updateCanoe();
+            score = 0;
+            hearts = 3;
+            timeLeft = 60;
+            gameOverTriggered = false;
+            obstacleDelay = 1500;
+            lifebuoyDelay = 5000;
+            activeLeftPositions = [];
+            document.getElementById('score').innerText = `Puntos: ${score}`;
+            document.getElementById('timer').innerText = `Tiempo: ${timeLeft}`;
+            document.getElementById('player-canoe').style.left = '164px';
+            gameInterval = setInterval(updateScore, 1000);
+            timerInterval = setInterval(updateTimer, 1000);
+            scheduleObstacle();
+            scheduleLifebuoy();
+        }
+
+        function updateScore() {
+            score++;
+            document.getElementById('score').innerText = `Puntos: ${score}`;
+        }
+
+        function updateTimer() {
+            timeLeft--;
+            document.getElementById('timer').innerText = `Tiempo: ${timeLeft}`;
+            if (timeLeft <= 0) gameOver();
+        }
+
+        function updateHearts() {
+            const heartsContainer = document.getElementById('hearts');
+            heartsContainer.innerHTML = '';
+            for (let i = 0; i < hearts; i++) {
+                const heart = document.createElement('img');
+                heart.src = 'images/juego/corazon1.png';
+                heart.className = 'heart';
+                heartsContainer.appendChild(heart);
+            }
+        }
+
+        function getUniqueLeft() {
+            let newLeft;
+            let attempts = 0;
+            do {
+                newLeft = Math.floor(Math.random() * (340));
+                attempts++;
+            } while (activeLeftPositions.includes(newLeft) && attempts < 10);
+            activeLeftPositions.push(newLeft);
+            setTimeout(() => {
+                const index = activeLeftPositions.indexOf(newLeft);
+                if (index !== -1) activeLeftPositions.splice(index, 1);
+            }, 3000);
+            return newLeft + 'px';
+        }
+
+        function spawnObstacle() {
+            const obstacle = document.createElement('div');
+            obstacle.className = 'obstacle';
+            obstacle.style.backgroundImage = `url(${obstacleImages[Math.floor(Math.random() * obstacleImages.length)]})`;
+            obstacle.style.top = '0px';
+            obstacle.style.left = getUniqueLeft();
+            document.getElementById('game-play').appendChild(obstacle);
+            moveDown(obstacle, 'obstacle');
+        }
+
+        function spawnLifebuoy() {
+            if (hearts < 3) {
+                const lifebuoy = document.createElement('div');
+                lifebuoy.className = 'lifebuoy';
+                lifebuoy.style.backgroundImage = 'url(images/juego/vidaMas.png)';
+                lifebuoy.style.top = '0px';
+                lifebuoy.style.left = getUniqueLeft();
+                document.getElementById('game-play').appendChild(lifebuoy);
+                moveDown(lifebuoy, 'lifebuoy');
+            }
+        }
+
+        function scheduleObstacle() {
+            spawnObstacle();
+            obstacleDelay = Math.min(obstacleDelay + 300, 3000);
+            obstacleTimer = setTimeout(scheduleObstacle, obstacleDelay);
+        }
+
+        function scheduleLifebuoy() {
+            spawnLifebuoy();
+            lifebuoyTimer = setTimeout(scheduleLifebuoy, lifebuoyDelay);
+        }
+
+        function moveDown(element, type) {
+            const moveInterval = setInterval(() => {
+                const top = parseInt(element.style.top);
+                if (top >= 540) {
+                    clearInterval(moveInterval);
+                    element.remove();
+                } else {
+                    element.style.top = top + 3 + 'px';
+                }
+
+                if (checkCollision(element)) {
+                    clearInterval(moveInterval);
+                    element.remove();
+                    if (type === 'obstacle') {
+                        hearts--;
+                        updateHearts();
+                        if (hearts <= 0) gameOver();
+                    } else if (type === 'lifebuoy' && hearts < 3) {
+                        hearts++;
+                        updateHearts();
+                    }
+                }
+            }, 100);
+        }
+
+        function checkCollision(element) {
+            const canoe = document.getElementById('player-canoe');
+            const canoeRect = canoe.getBoundingClientRect();
+            const elemRect = element.getBoundingClientRect();
+            return !(
+                canoeRect.top > elemRect.bottom ||
+                canoeRect.bottom < elemRect.top ||
+                canoeRect.left > elemRect.right ||
+                canoeRect.right < elemRect.left
+            );
+        }
+
+        function moveCanoe(direction) {
+            const canoe = document.getElementById('player-canoe');
+            const left = parseInt(canoe.style.left);
+            if (direction === 'left' && left > 0) {
+                canoe.style.left = left - 20 + 'px';
+            } else if (direction === 'right' && left < 328) {
+                canoe.style.left = left + 20 + 'px';
+            }
+        }
+
+        function updateCanoe() {
+            document.getElementById('selected-canoe').src = canoeImages[currentCanoe - 1];
+            document.getElementById('player-canoe').style.backgroundImage = `url(${canoeImages[currentCanoe - 1]})`;
+        }
+
+        function gameOver() {
+            if (gameOverTriggered) return;
+            gameOverTriggered = true;
+            clearInterval(gameInterval);
+            clearTimeout(obstacleTimer);
+            clearTimeout(lifebuoyTimer);
+            clearInterval(timerInterval);
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        function resetGame() {
+            document.getElementById('modal').style.display = 'none';
+            document.getElementById('game-container').style.display = 'block';
+            document.getElementById('game-play').style.display = 'none';
+            document.getElementById('score').innerText = 'Puntos: 0';
+            const elements = document.querySelectorAll('.obstacle, .lifebuoy');
+            elements.forEach(el => el.remove());
+            updateHearts();
+        }
+
+        document.getElementById('navigate-button').addEventListener('click', startGame);
+        document.getElementById('left-arrow').addEventListener('click', () => {
+            currentCanoe = (currentCanoe === 1) ? 5 : currentCanoe - 1;
+            updateCanoe();
+        });
+        document.getElementById('right-arrow').addEventListener('click', () => {
+            currentCanoe = (currentCanoe === 5) ? 1 : currentCanoe + 1;
+            updateCanoe();
+        });
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowLeft') moveCanoe('left');
+            if (event.key === 'ArrowRight') moveCanoe('right');
+        });
+        document.getElementById('restart-button').addEventListener('click', resetGame);
+    </script>
+</body>
+
+</html>
