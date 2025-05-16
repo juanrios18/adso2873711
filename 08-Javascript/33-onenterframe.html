@@ -3,13 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Animation</title>
+    <title>32-Animation</title>
     <link rel="stylesheet" href="css/master.css">
+    <style>
+          div.pug {
+        background: url('images/animation/poses.png') no-repeat center center;
+        background-position: -16px;
+        background-size: contain;
+        height: 200px;
+        width: 200px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    </style>
 </head>
 <body>
-    <nav class="controls">
+    <nav Class="controls">
         <a href="index.html">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="#ffffff" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ffffff" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
         </a>
     </nav>
     <main>
@@ -18,11 +31,54 @@
             <h2>Execute code on each frame for animations.</h2>
         </header>
         <section>
-
+          <div class="pug"></div>
+            <div class="controls">
+                <button class="left">Run Left</button>
+                <button class="idle">Idle</button>
+                <button class="right">Run Right</button>
+            </div>
         </section>
     </main>
     <script>
-        
+      //Elements
+      const idle  = document.querySelector('.idle')
+      const left  = document.querySelector('.left')
+      const right = document.querySelector('.right')
+      const pug   = document.querySelector('.pug')
+
+      //Sprite Config
+      const frameWidth  = 100
+      const totalFrames = 8
+      let fps           = 6
+      let currentFrame  = 0
+      let lastTime      = 0
+
+      // Events 
+      idel.addEventListener('click', (e) => {
+        fps = 6;
+        pug.style.backgroundPositionY = '0px';
+      });
+
+      left.addEventListener('click', (e) => {
+        fps = 24;
+        pug.style.backgroundPositionY = '-200px';
+      });
+
+      right.addEventListener('click', (e) => {
+        fps = 24;
+        pug.style.backgroundPositionY = '-100px';
+      });
+
+      function animatePug(timestamp) {
+        if (timestamp - lastTime > 1000 / fps) {
+           pug.style.backgroundPositionX = `${currentFrame * -frameWidth}px`;
+           currentFrame = (currentFrame + 1) % totalFrames;
+           lastTime = timestamp;
+        } 
+        requestAnimationFrame(animatePug);
+      }
+
+      requestAnimationFrame(animatePug);
     </script>
-</body>
+ </body>
 </html>
